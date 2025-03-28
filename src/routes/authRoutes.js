@@ -20,13 +20,10 @@ const router = express.Router();
 
 router.post("/register", validationMiddleware(registerSchema), registerController);
 router.post("/login", validationMiddleware(loginSchema), loginController);
-
 router.post("/email-verify", validationMiddleware(emailVerifySchema), emailVerifyController);
 router.post("/resend-email", validationMiddleware(resendEmailSchema), resendEmailVerifyController);
-
 router.post("/forgot-password", validationMiddleware(forgotPasswordSchema), forgotPasswordController);
 router.post("/change-password", validationMiddleware(changePasswordSchema), changePasswordController);
-
 router.get("/me", authenticateUser, meController);
 router.put("/profile", authenticateUser, profileController);
 
