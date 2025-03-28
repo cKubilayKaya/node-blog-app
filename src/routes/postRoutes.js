@@ -8,12 +8,14 @@ import { uniquePostController } from "../controllers/post/uniquePostController.j
 import { updatePostController } from "../controllers/post/updatePostController.js";
 import { updatePostSchema } from "../validations/post/updatePostSchema.js";
 import { deletePostController } from "../controllers/post/deletePostController.js";
+import { listPostsByUserIDController } from "../controllers/post/listPostsByUserIDController.js";
 
 const router = express.Router();
 
 router.post("/", authenticateUser, validationMiddleware(createPostSchema), createPostController);
 router.get("/", listPostController);
 router.get("/:slug", uniquePostController);
+router.get("/user/:userId", listPostsByUserIDController);
 router.patch("/:slug", authenticateUser, validationMiddleware(updatePostSchema), updatePostController);
 router.delete("/:slug", authenticateUser, deletePostController);
 
