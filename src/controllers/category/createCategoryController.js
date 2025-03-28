@@ -3,8 +3,8 @@ import { createCategoryService } from "../../services/category/createCategorySer
 export const createCategoryController = async (req, res, next) => {
   const { name, description } = req.body;
   try {
-    const createCategoryRes = await createCategoryService(name, description);
-    res.status(201).json(createCategoryRes);
+    const response = await createCategoryService(name, description);
+    res.status(201).json(response);
   } catch (error) {
     next(error);
   }

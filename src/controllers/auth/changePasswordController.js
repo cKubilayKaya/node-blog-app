@@ -3,8 +3,8 @@ import { changePasswordService } from "../../services/auth/changePasswordService
 export const changePasswordController = async (req, res, next) => {
   try {
     const { code, password, rePassword, email } = req.body;
-    const changePasswordRes = await changePasswordService(code, password, rePassword, email);
-    res.status(200).json(changePasswordRes);
+    const response = await changePasswordService(code, password, rePassword, email);
+    res.status(200).json(response);
   } catch (error) {
     next(error);
   }

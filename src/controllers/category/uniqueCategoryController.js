@@ -4,8 +4,8 @@ export const uniqueCategoryController = async (req, res, next) => {
   const { slug } = req.params;
 
   try {
-    const uniqueCategoryRes = await uniqueCategoryService(slug);
-    res.status(200).json(uniqueCategoryRes);
+    const response = await uniqueCategoryService(slug);
+    res.status(200).json(response);
   } catch (error) {
     next(error);
   }

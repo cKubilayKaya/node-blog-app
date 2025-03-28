@@ -3,8 +3,8 @@ import { deleteCategoryService } from "../../services/category/deleteCategorySer
 export const deleteCategoryController = async (req, res, next) => {
   const { slug } = req.params;
   try {
-    const deleteCategoryRes = await deleteCategoryService(slug);
-    res.status(200).json(deleteCategoryRes);
+    const response = await deleteCategoryService(slug);
+    res.status(200).json(response);
   } catch (error) {
     next(error);
   }
