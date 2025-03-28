@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                         String    @id @default(uuid())
+  email                      String    @unique
+  username                   String    @unique
+  fullname                   String?
+  password                   String
+  isEmailVerified            Boolean   @default(false)
+  emailVerificationCode      String?
+  emailVerificationCreatedAt DateTime? @default(now())
+  passwordResetCode          String?
+  passwordResetExpires       DateTime?
+  wrongLoginAttempts         Int       @default(0)
+  isBlocked                  Boolean   @default(false)
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+
+  posts    Post[]
+  comments Comment[]
+}
+
+model Post {
+  id               String   @id @default(uuid())
+  title            String
+  slug             String   @unique
+  content          String
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  authorId         String
+  featuredImageUrl String?
+  excerpt          String?
+  viewCount        Int      @default(0)
+
+  author     User       @relation(fields: [authorId], references: [id])
+  categories Category[]
+  tags       Tag[]
+  comments   Comment[]
+
+  @@index([authorId])
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  posts Post[]
+}
+
+model Tag {
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
+  posts Post[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  postId    String
+
+  author User @relation(fields: [authorId], references: [id])
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // İsteğe Bağlı: Yorumlara yanıt (threading) için
+  // parentId String?
+  // parent   Comment?  @relation("Replies", fields: [parentId], references: [id], onDelete: Cascade)
+  // replies  Comment[] @relation("Replies")
+  // @@index([parentId]) // Eğer yanıt sistemi eklenirse
+
+  @@index([authorId])
+  @@index([postId])
+}
