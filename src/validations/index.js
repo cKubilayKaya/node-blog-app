@@ -89,8 +89,7 @@ export const categoryDescriptionSchema = () =>
     "string.max": "Category description must be less than 500 characters",
   });
 
-// POST
-
+// POST CREATE
 export const postTitleSchema = () =>
   Joi.string().min(3).max(200).required().messages({
     "string.base": "Post title must be a string",
@@ -145,4 +144,20 @@ export const excerptSchema = () =>
     "string.base": "Excerpt must be a string",
     "string.max": "Excerpt must be less than or equal to 500 characters",
     "string.empty": "Excerpt cannot be just an empty string (use null or omit if not needed)",
+  });
+
+// POST UPDATE
+
+export const updatePostTitleSchema = () =>
+  Joi.string().min(3).max(200).allow("").messages({
+    "string.base": "Post title must be a string",
+    "string.min": "Post title must be at least 3 characters long",
+    "string.max": "Post title must be less than 50 characters",
+  });
+
+export const updatePostContentSchema = () =>
+  Joi.string().min(3).max(500).allow("").messages({
+    "string.base": "Post content must be a string",
+    "string.min": "Post content must be at least 3 characters long",
+    "string.max": "Post content must be less than 500 characters",
   });
