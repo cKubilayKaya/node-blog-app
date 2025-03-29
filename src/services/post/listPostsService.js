@@ -2,7 +2,7 @@ import { CustomError } from "../../utils/customError.js";
 import paginationService from "../../utils/paginationService.js";
 import prisma from "../../utils/prisma.js";
 
-export const listPostsService = async (page, limit, order) => {
+export const listPostsService = async (page, limit, order, comments) => {
   if (page <= 0 || limit <= 0) {
     throw new CustomError("Page and limit must be greater than 0", 400);
   }
@@ -19,6 +19,12 @@ export const listPostsService = async (page, limit, order) => {
     take: limit,
     orderBy: {
       createdAt: order === "desc" ? "desc" : "asc",
+    },
+    include: {
+      ...(comments ? { comments: true } : {}),
+      _count: {
+        select: { comments: true },
+      },
     },
   });
 
