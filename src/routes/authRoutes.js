@@ -15,6 +15,7 @@ import { changePasswordSchema } from "../validations/auth/changePasswordSchema.j
 import { meController } from "../controllers/auth/meController.js";
 import { authenticateUser } from "../middlewares/authenticateUser.js";
 import { profileController } from "../controllers/auth/profileController.js";
+import { findUserController } from "../controllers/auth/findUserController.js";
 
 const router = express.Router();
 
@@ -25,6 +26,7 @@ router.post("/resend-email", validationMiddleware(resendEmailSchema), resendEmai
 router.post("/forgot-password", validationMiddleware(forgotPasswordSchema), forgotPasswordController);
 router.post("/change-password", validationMiddleware(changePasswordSchema), changePasswordController);
 router.get("/me", authenticateUser, meController);
+router.get("/find/:username", findUserController);
 router.put("/profile", authenticateUser, profileController);
 
 export default router;
