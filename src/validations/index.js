@@ -161,3 +161,22 @@ export const updatePostContentSchema = () =>
     "string.min": "Post content must be at least 3 characters long",
     "string.max": "Post content must be less than 500 characters",
   });
+
+// COMMENT CREATE
+
+export const commentContentSchema = () =>
+  Joi.string().min(3).max(500).required().messages({
+    "string.base": "Comment content must be a string",
+    "string.min": "Comment content must be at least 3 characters long",
+    "string.max": "Comment content must be less than 500 characters",
+    "any.required": "Comment content is required",
+    "string.empty": "Comment content cannot be empty",
+  });
+
+export const commentPostIdSchema = () =>
+  Joi.string().uuid({ version: "uuidv4" }).required().messages({
+    "string.base": "Post ID must be a string",
+    "string.guid": "Invalid Post ID format",
+    "any.required": "Post ID is required",
+    "string.empty": "Post ID cannot be empty",
+  });
