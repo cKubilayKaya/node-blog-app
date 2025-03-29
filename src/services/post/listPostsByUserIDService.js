@@ -3,7 +3,7 @@ import { isUserExist } from "../../utils/isUserExist.js";
 import paginationService from "../../utils/paginationService.js";
 import prisma from "../../utils/prisma.js";
 
-export const listPostsByUserIDService = async (userId, page, limit, order) => {
+export const listPostsByUserIDService = async (userId, page, limit, order, comments) => {
   const user = await isUserExist({ key: "id", value: userId }, true);
   if (!user) throw new CustomError("This user does not exists.", 404);
 
@@ -26,6 +26,12 @@ export const listPostsByUserIDService = async (userId, page, limit, order) => {
     take: limit,
     orderBy: {
       createdAt: order === "desc" ? "desc" : "asc",
+    },
+    include: {
+      ...(comments ? { comments: true } : {}),
+      _count: {
+        select: { comments: true },
+      },
     },
   });
 

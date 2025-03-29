@@ -1,10 +1,16 @@
 import { CustomError } from "../../utils/customError.js";
 import prisma from "../../utils/prisma.js";
 
-export const uniquePostService = async (slug) => {
+export const uniquePostService = async (slug, comments) => {
   const findPost = await prisma.post.findUnique({
     where: {
       slug,
+    },
+    include: {
+      ...(comments ? { comments: true } : {}),
+      _count: {
+        select: { comments: true },
+      },
     },
   });
 
