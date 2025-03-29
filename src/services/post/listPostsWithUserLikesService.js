@@ -36,6 +36,14 @@ export const listPostsWithUserLikesService = async (page, limit, order, comments
       createdAt: order === "desc" ? "desc" : "asc",
     },
     include: {
+      author: {
+        select: {
+          id: true,
+          email: true,
+          fullname: true,
+          username: true,
+        },
+      },
       ...(comments ? { comments: true } : {}),
       _count: {
         select: { comments: true },

@@ -11,6 +11,14 @@ export const uniquePostWithUserLikesService = async (slug, comments, token) => {
       slug,
     },
     include: {
+      author: {
+        select: {
+          id: true,
+          email: true,
+          fullname: true,
+          username: true,
+        },
+      },
       ...(comments ? { comments: true } : {}),
       _count: {
         select: { comments: true },
