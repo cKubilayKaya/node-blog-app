@@ -15,7 +15,27 @@ export const uniquePostService = async (slug, comments) => {
           username: true,
         },
       },
-      ...(comments ? { comments: true } : {}),
+      ...(comments
+        ? {
+            comments: {
+              orderBy: {
+                createdAt: "desc",
+              },
+              select: {
+                id: true,
+                content: true,
+                createdAt: true,
+                author: {
+                  select: {
+                    email: true,
+                    fullname: true,
+                    username: true,
+                  },
+                },
+              },
+            },
+          }
+        : {}),
       _count: {
         select: { comments: true },
       },

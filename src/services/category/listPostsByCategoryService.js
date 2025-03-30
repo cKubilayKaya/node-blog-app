@@ -39,6 +39,9 @@ export const listPostsByCategoryService = async (page, limit, order, slug) => {
           username: true,
         },
       },
+      _count: {
+        select: { comments: true },
+      },
     },
   });
 
