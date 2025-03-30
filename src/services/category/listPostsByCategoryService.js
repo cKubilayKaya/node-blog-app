@@ -31,6 +31,15 @@ export const listPostsByCategoryService = async (page, limit, order, slug) => {
     orderBy: {
       createdAt: order === "desc" ? "desc" : "asc",
     },
+    include: {
+      author: {
+        select: {
+          email: true,
+          fullname: true,
+          username: true,
+        },
+      },
+    },
   });
 
   const totalPosts = category._count.posts;
