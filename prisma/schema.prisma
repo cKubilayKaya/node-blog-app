@@ -44,7 +44,7 @@ model Post {
   author     User       @relation(fields: [authorId], references: [id])
   categories Category[]
   comments   Comment[]
-  likes      Like[]
+  likes      Like[]     @relation("PostToLike")
 
   @@index([authorId])
 }
@@ -66,10 +66,12 @@ model Like {
   userId    String
   createdAt DateTime @default(now())
 
-  post Post @relation(fields: [postId], references: [id])
+  post Post @relation("PostToLike", fields: [postId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id])
 
   @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
 }
 
 model Comment {
