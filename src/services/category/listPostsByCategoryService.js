@@ -37,6 +37,7 @@ export const listPostsByCategoryService = async (page, limit, order, slug) => {
           email: true,
           fullname: true,
           username: true,
+          profileImageUrl: true,
         },
       },
       _count: {

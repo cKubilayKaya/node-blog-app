@@ -54,6 +54,7 @@ export const listPostsWithIsLikedByCategoryService = async (page, limit, order, 
           email: true,
           fullname: true,
           username: true,
+          profileImageUrl: true,
         },
       },
       _count: {

@@ -16,6 +16,7 @@ import { meController } from "../controllers/auth/meController.js";
 import { authenticateUser } from "../middlewares/authenticateUser.js";
 import { profileController } from "../controllers/auth/profileController.js";
 import { findUserController } from "../controllers/auth/findUserController.js";
+import { uploadProfileImage } from "../middlewares/upload.js";
 
 const router = express.Router();
 
@@ -27,6 +28,6 @@ router.post("/forgot-password", validationMiddleware(forgotPasswordSchema), forg
 router.post("/change-password", validationMiddleware(changePasswordSchema), changePasswordController);
 router.get("/me", authenticateUser, meController);
 router.get("/find/:username", findUserController);
-router.put("/profile", authenticateUser, profileController);
+router.patch("/profile", authenticateUser, uploadProfileImage.single("profileImageUrl"), profileController);
 
 export default router;

@@ -22,10 +22,14 @@ model User {
   isBlocked                  Boolean   @default(false)
   createdAt                  DateTime  @default(now())
   updatedAt                  DateTime  @updatedAt
-
-  posts    Post[]
-  comments Comment[]
-  likes    Like[]
+  profileImageUrl            String?
+  bio                        String?
+  twitterLink                String?
+  instagramLink              String?
+  linkedinLink               String?
+  posts                      Post[]
+  comments                   Comment[]
+  likes                      Like[]
 }
 
 model Post {
