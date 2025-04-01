@@ -10,10 +10,11 @@ import { updatePostSchema } from "../validations/post/updatePostSchema.js";
 import { deletePostController } from "../controllers/post/deletePostController.js";
 import { listPostsByUserIDController } from "../controllers/post/listPostsByUserIDController.js";
 import { likePostController } from "../controllers/post/likePostController.js";
+import upload from "../middlewares/upload.js";
 
 const router = express.Router();
 
-router.post("/", authenticateUser, validationMiddleware(createPostSchema), createPostController);
+router.post("/", authenticateUser, upload.single("featuredImageUrl"), validationMiddleware(createPostSchema), createPostController);
 router.post("/:slug/like", authenticateUser, likePostController);
 router.get("/", listPostController);
 router.get("/:slug", uniquePostController);
