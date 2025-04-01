@@ -5,7 +5,12 @@ import makeSlug from "../../utils/makeSlug.js";
 export const updatePostService = async (data, slug) => {
   const dataObject = {
     ...data,
-    ...(data?.name && { slug: makeSlug(data?.name) }),
+    ...(data?.title && { slug: makeSlug(data?.title) }),
+    ...(data?.featuredImageUrl ? { featuredImageUrl: data?.featuredImageUrl } : {}),
+    categories: {
+      set: [],
+      connect: data?.categories?.map((id) => ({ id })) || [],
+    },
   };
 
   const existingPost = await prisma.post.findUnique({

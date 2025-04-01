@@ -7,6 +7,11 @@ export const uniquePostService = async (slug, comments) => {
       slug,
     },
     include: {
+      categories: {
+        select: {
+          id: true,
+        },
+      },
       author: {
         select: {
           id: true,

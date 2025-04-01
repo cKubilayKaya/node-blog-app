@@ -19,7 +19,7 @@ router.post("/:slug/like", authenticateUser, likePostController);
 router.get("/", listPostController);
 router.get("/:slug", uniquePostController);
 router.get("/user/:userId", listPostsByUserIDController);
-router.patch("/:slug", authenticateUser, validationMiddleware(updatePostSchema), updatePostController);
+router.patch("/:slug", authenticateUser, upload.single("featuredImageUrl"), validationMiddleware(updatePostSchema), updatePostController);
 router.delete("/:slug", authenticateUser, deletePostController);
 
 export default router;
