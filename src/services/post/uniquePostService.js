@@ -18,6 +18,7 @@ export const uniquePostService = async (slug, comments) => {
           email: true,
           fullname: true,
           username: true,
+          profileImageUrl: true,
         },
       },
       ...(comments

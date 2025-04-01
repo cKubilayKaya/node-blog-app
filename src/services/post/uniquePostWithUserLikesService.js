@@ -22,6 +22,7 @@ export const uniquePostWithUserLikesService = async (slug, comments, token) => {
           email: true,
           fullname: true,
           username: true,
+          profileImageUrl: true,
         },
       },
       ...(comments

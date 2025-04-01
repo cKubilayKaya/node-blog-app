@@ -17,6 +17,7 @@ import { authenticateUser } from "../middlewares/authenticateUser.js";
 import { profileController } from "../controllers/auth/profileController.js";
 import { findUserController } from "../controllers/auth/findUserController.js";
 import { uploadProfileImage } from "../middlewares/upload.js";
+import { tokenVerifyController } from "../controllers/auth/tokenVerifyController.js";
 
 const router = express.Router();
 
@@ -29,5 +30,6 @@ router.post("/change-password", validationMiddleware(changePasswordSchema), chan
 router.get("/me", authenticateUser, meController);
 router.get("/find/:username", findUserController);
 router.patch("/profile", authenticateUser, uploadProfileImage.single("profileImageUrl"), profileController);
+router.get("/token-verify", tokenVerifyController);
 
 export default router;
