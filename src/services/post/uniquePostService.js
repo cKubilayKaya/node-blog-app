@@ -10,6 +10,8 @@ export const uniquePostService = async (slug, comments) => {
       categories: {
         select: {
           id: true,
+          slug: true,
+          name: true,
         },
       },
       author: {

@@ -14,6 +14,8 @@ export const uniquePostWithUserLikesService = async (slug, comments, token) => {
       categories: {
         select: {
           id: true,
+          slug: true,
+          name: true,
         },
       },
       author: {
