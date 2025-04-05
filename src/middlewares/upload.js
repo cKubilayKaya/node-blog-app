@@ -12,7 +12,7 @@ const getStorage = (folder) => {
   return multer.diskStorage({
     destination: (req, file, cb) => {
       // Dosyanın yükleneceği yol
-      const uploadPath = path.join(__dirname, `../uploads/${folder}`);
+      const uploadPath = path.join(__dirname, `../../uploads/${folder}`);
 
       // Klasörün var olup olmadığını kontrol et ve yoksa oluştur
       fs.mkdirSync(uploadPath, { recursive: true });

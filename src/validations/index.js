@@ -100,10 +100,8 @@ export const postTitleSchema = () =>
   });
 
 export const postContentSchema = () =>
-  Joi.string().min(3).max(500).required().messages({
+  Joi.string().required().messages({
     "string.base": "Post content must be a string",
-    "string.min": "Post content must be at least 3 characters long",
-    "string.max": "Post content must be less than 500 characters",
     "any.required": "Post content is required",
     "string.empty": "Post content cannot be empty",
   });
@@ -156,10 +154,8 @@ export const updatePostTitleSchema = () =>
   });
 
 export const updatePostContentSchema = () =>
-  Joi.string().min(3).max(500).allow("").messages({
+  Joi.string().allow("").messages({
     "string.base": "Post content must be a string",
-    "string.min": "Post content must be at least 3 characters long",
-    "string.max": "Post content must be less than 500 characters",
   });
 
 // COMMENT CREATE

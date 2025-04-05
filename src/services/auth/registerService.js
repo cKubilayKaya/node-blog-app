@@ -36,7 +36,7 @@ export const registerService = async (data) => {
 
   if (!emailResponse || emailResponse.error) throw new CustomError("Email couldn't be sent.", 500);
 
-  const excludeFileds = [
+  const excludeFields = [
     "id",
     "password",
     "emailVerificationCode",
@@ -48,7 +48,7 @@ export const registerService = async (data) => {
     "isBlocked",
   ];
 
-  const filteredUser = excludeFieldsFromArray(excludeFileds, user);
+  const filteredUser = excludeFieldsFromArray(excludeFields, user);
 
   return { success: true, user: filteredUser };
 };

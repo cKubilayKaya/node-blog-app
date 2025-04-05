@@ -27,6 +27,6 @@ app.use("/api/comment", commentRoutes);
 
 app.use(errorHandler);
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 export default app;

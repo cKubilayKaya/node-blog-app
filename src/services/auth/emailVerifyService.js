@@ -25,7 +25,7 @@ export const emailVerifyService = async (email, code) => {
     },
   });
 
-  const excludeFileds = [
+  const excludeFields = [
     "id",
     "password",
     "emailVerificationCode",
@@ -36,7 +36,7 @@ export const emailVerifyService = async (email, code) => {
     "isBlocked",
   ];
 
-  const filteredUser = excludeFieldsFromArray(excludeFileds, updatedUser);
+  const filteredUser = excludeFieldsFromArray(excludeFields, updatedUser);
 
   return { success: true, user: filteredUser };
 };

@@ -26,8 +26,8 @@ export const findUserService = async (username) => {
 
   const user = await isUserExist({ key: "username", value: username }, true, includeObject);
 
-  const excludeFileds = ["password"];
-  const filteredUser = excludeFieldsFromArray(excludeFileds, user);
+  const excludeFields = ["password"];
+  const filteredUser = excludeFieldsFromArray(excludeFields, user);
 
   return { success: true, user: filteredUser };
 };

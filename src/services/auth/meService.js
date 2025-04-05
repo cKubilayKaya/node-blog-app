@@ -31,8 +31,8 @@ export const meService = async (token) => {
 
   const user = await isUserExist({ key: "id", value: decodedUser?.id }, true, includeObject);
 
-  const excludeFileds = ["password"];
-  const filteredUser = excludeFieldsFromArray(excludeFileds, user);
+  const excludeFields = ["password"];
+  const filteredUser = excludeFieldsFromArray(excludeFields, user);
 
   return { success: true, user: filteredUser };
 };

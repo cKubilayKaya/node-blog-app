@@ -15,7 +15,7 @@ export const profileService = async (data, token) => {
     data: data,
   });
 
-  const excludeFileds = [
+  const excludeFields = [
     "id",
     "password",
     "emailVerificationCode",
@@ -27,7 +27,7 @@ export const profileService = async (data, token) => {
     "isBlocked",
   ];
 
-  const filteredUser = excludeFieldsFromArray(excludeFileds, updatedUser);
+  const filteredUser = excludeFieldsFromArray(excludeFields, updatedUser);
 
   return { success: true, user: filteredUser };
 };
