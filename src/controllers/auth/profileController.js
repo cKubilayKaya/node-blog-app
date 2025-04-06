@@ -7,8 +7,6 @@ export const profileController = async (req, res, next) => {
 
     if (req.file) {
       data.profileImageUrl = `/uploads/users/${req?.file?.filename}`;
-    } else {
-      data.profileImageUrl = null;
     }
 
     const response = await profileService(data, token);

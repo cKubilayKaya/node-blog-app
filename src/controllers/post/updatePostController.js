@@ -6,8 +6,6 @@ export const updatePostController = async (req, res, next) => {
 
   if (req.file) {
     data.featuredImageUrl = `/uploads/posts/${req?.file?.filename}`;
-  } else {
-    data.featuredImageUrl = null;
   }
 
   try {
