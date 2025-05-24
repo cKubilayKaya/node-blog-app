@@ -4,7 +4,18 @@ import { isUserExist } from "../../utils/isUserExist.js";
 export const findUserService = async (username) => {
   const includeObject = {
     include: {
-      posts: true,
+      posts: {
+        include: {
+          author: {
+            select: {
+              id: true,
+              email: true,
+              fullname: true,
+              username: true,
+            },
+          },
+        },
+      },
       likes: {
         include: {
           post: {
